@@ -1,0 +1,31 @@
+{
+  "name": "cf-bot",
+  "version": "1.0.0",
+  "description": "best tool for codeforces contests",
+  "main": "index.js",
+  "bin": {
+    "cf": "./cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChiragKasat/Codeforces-Utility-Tool.git"
+  },
+  "keywords": [
+    "codeforces",
+    "cf-bot"
+  ],
+  "author": "ChiragKasat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ChiragKasat/Codeforces-Utility-Tool/issues"
+  },
+  "homepage": "https://github.com/ChiragKasat/Codeforces-Utility-Tool#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^5.1.0",
+    "inquirer": "^7.3.1",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "tough-cookie-filestore": "0.0.1"
+  }
+}
