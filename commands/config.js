@@ -4,8 +4,8 @@ const login = require('../util/login');
 module.exports = async () => {
 	const inp = await inquirer.prompt([
 		{
-			type: 'list',
 			name: 'option',
+			type: 'list',
 			message: 'What do you want to do?',
 			choices: [
 				'login',
@@ -22,7 +22,7 @@ module.exports = async () => {
 			login(creds.handleOrEmail, creds.password);
 			break;
 		case 'add a template':
-			console.log('add a template');
+			console.log('addTemplate');
 			break;
 		case 'delete a template':
 			console.log('delete a template');
