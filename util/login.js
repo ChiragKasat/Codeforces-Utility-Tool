@@ -8,7 +8,6 @@ const FileCookieStore = require('tough-cookie-filestore');
 const cookiepath = path.join(homeDir, '.cfbot/cookies.json');
 
 if (!fs.existsSync(cookiepath)) {
-	// fs.closeSync(fs.openSync(cookiepath, 'w'));
 	fs.writeFileSync(cookiepath, '{}');
 }
 

@@ -5,14 +5,13 @@ const { Command } = require('commander');
 const program = new Command();
 const pkg = require('./package.json');
 const homeDir = require('os').homedir();
-const { red, cyanBright, bgWhite, bgBlack } = require('chalk');
+const { red, cyanBright, bgBlack } = require('chalk');
 const moment = require('moment');
 
 const root = path.join(homeDir, '.cfbot');
 const templatePath = path.join(root, 'template');
 const templateData = {
-	templates: [],
-	default: 0
+	templates: []
 };
 
 if (!fs.existsSync(root)) {

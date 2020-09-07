@@ -1,5 +1,8 @@
 const inquirer = require('inquirer');
 const login = require('../util/login');
+// const addTemplate = require('../util/addTemplate');
+// const showTemplates = require('../util/showTemplates');
+// const deleteTemplate = require('../util/deleteTemplate');
 
 module.exports = async () => {
 	const inp = await inquirer.prompt([
@@ -11,7 +14,7 @@ module.exports = async () => {
 				'login',
 				'add a template',
 				'delete a template',
-				'set default template'
+				'show all templates'
 			]
 		}
 	]);
@@ -22,16 +25,16 @@ module.exports = async () => {
 			login(creds.handleOrEmail, creds.password);
 			break;
 		case 'add a template':
-			console.log('addTemplate');
+			// addTemplate();
 			break;
 		case 'delete a template':
-			console.log('delete a template');
+			// deleteTemplate();
 			break;
-		case 'set default template':
-			console.log('set default template');
+		case 'show all templates':
+			// showTemplates();
 			break;
 		default:
-			console.log('error	');
+			console.log('error');
 	}
 };
 
