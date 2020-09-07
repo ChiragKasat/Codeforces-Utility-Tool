@@ -19,7 +19,7 @@ const templateQuestions = [
 	{
 		name: 'lang',
 		type: 'list',
-		message: 'What do you want to do?',
+		message: 'Choose the language of template',
 		choices: languages.map(
 			lang => `${Object.keys(lang)[0]} - ${Object.values(lang)[0]}`
 		)

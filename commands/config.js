@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const login = require('../util/login');
 const addTemplate = require('../util/addTemplate');
 const showTemplates = require('../util/showTemplates');
-// const deleteTemplate = require('../util/deleteTemplate');
+const deleteTemplate = require('../util/deleteTemplate');
 
 module.exports = async () => {
 	const inp = await inquirer.prompt([
@@ -28,7 +28,7 @@ module.exports = async () => {
 			addTemplate();
 			break;
 		case 'delete a template':
-			// deleteTemplate();
+			deleteTemplate();
 			break;
 		case 'show all templates':
 			showTemplates();
