@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const login = require('../util/login');
 const addTemplate = require('../util/addTemplate');
-// const showTemplates = require('../util/showTemplates');
+const showTemplates = require('../util/showTemplates');
 // const deleteTemplate = require('../util/deleteTemplate');
 
 module.exports = async () => {
@@ -31,7 +31,7 @@ module.exports = async () => {
 			// deleteTemplate();
 			break;
 		case 'show all templates':
-			// showTemplates();
+			showTemplates();
 			break;
 		default:
 			console.log('error');
