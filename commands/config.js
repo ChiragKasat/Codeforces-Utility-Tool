@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const login = require('../util/login');
-// const addTemplate = require('../util/addTemplate');
+const addTemplate = require('../util/addTemplate');
 // const showTemplates = require('../util/showTemplates');
 // const deleteTemplate = require('../util/deleteTemplate');
 
@@ -25,7 +25,7 @@ module.exports = async () => {
 			login(creds.handleOrEmail, creds.password);
 			break;
 		case 'add a template':
-			// addTemplate();
+			addTemplate();
 			break;
 		case 'delete a template':
 			// deleteTemplate();
