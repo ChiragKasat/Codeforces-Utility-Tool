@@ -2,14 +2,21 @@ const path = require('path');
 const fs = require('fs');
 const { homedir } = require('os');
 const inquirer = require('inquirer');
-const templateData = JSON.parse(fs.readFileSync(path.join(homedir(), '.cfbot', 'template')));
+const { red } = require('chalk');
+const templateData = JSON.parse(
+	fs.readFileSync(path.join(homedir(), '.cfbot', 'template'))
+);
 const templates = templateData.templates;
 
 module.exports = async () => {
 	const answer = await inquirer.prompt(questions);
 	const index = answer.template.split(':')[0];
-	templates.splice(index-1, 1);
-	fs.writeFileSync(path.join(homedir(), '.cfbot', 'template'), JSON.stringify(templateData));
+	templates.splice(index - 1, 1);
+	fs.writeFileSync(
+		path.join(homedir(), '.cfbot', 'template'),
+		JSON.stringify(templateData)
+	);
+	console.log(red('Template deleted.'));
 };
 
 const questions = [

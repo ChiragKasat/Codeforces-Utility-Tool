@@ -3,7 +3,10 @@ const fs = require('fs');
 const { homedir } = require('os');
 const inquirer = require('inquirer');
 const languages = require('./languages');
-const templateData = JSON.parse(fs.readFileSync(path.join(homedir(), '.cfbot', 'template')));
+const { green } = require('chalk');
+const templateData = JSON.parse(
+	fs.readFileSync(path.join(homedir(), '.cfbot', 'template'))
+);
 const aliases = templateData.templates.map(template => template.alias);
 
 module.exports = async () => {
@@ -12,14 +15,18 @@ module.exports = async () => {
 	answer.path = path.resolve(answer.path);
 	templateData.templates.push(answer);
 	answer.alias = answer.alias.trim();
-	fs.writeFileSync(path.join(homedir(), '.cfbot', 'template'), JSON.stringify(templateData));
+	fs.writeFileSync(
+		path.join(homedir(), '.cfbot', 'template'),
+		JSON.stringify(templateData)
+	);
+	console.log(green('Template added succesfully.'));
 };
 
 const templateQuestions = [
 	{
 		name: 'lang',
 		type: 'list',
-		message: 'Choose the language of template',
+		message: 'What do you want to do?',
 		choices: languages.map(
 			lang => `${Object.keys(lang)[0]} - ${Object.values(lang)[0]}`
 		)
@@ -30,8 +37,9 @@ const templateQuestions = [
 		message: 'Type a alias name for this template(e.g. -> cpp, python)',
 		validate: value => {
 			value = value.trim();
-			if(aliases.includes(value)) return 'this alias is already present, try another...'
-			if(value)return true;
+			if (aliases.includes(value))
+				return 'this alias is already present, try another...';
+			if (value) return true;
 			return "Cant't be empty";
 		}
 	},
