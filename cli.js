@@ -6,7 +6,7 @@ const program = new Command();
 const pkg = require('./package.json');
 const homeDir = require('os').homedir();
 const { red, cyanBright, bgBlack } = require('chalk');
-const { isAfter, parseISO } = require('date-fns');
+const isLoggedIn = require('./util/isLoggedIn');
 
 const root = path.join(homeDir, '.cfbot');
 const templatePath = path.join(root, 'template');
@@ -21,28 +21,13 @@ if (!fs.existsSync(root)) {
 	}
 }
 
-let isLoggedIn = true;
+let isLogged = true;
 
-if (fs.existsSync(path.join(root, 'cookies.json'))) {
-	const cookies = JSON.parse(fs.readFileSync(path.join(root, 'cookies.json')));
-	if (cookies['codeforces.com'] === undefined) {
-		isLoggedIn = false;
-	} else {
-		const user = cookies['codeforces.com']['/']['X-User'];
-		if (user === undefined) {
-			isLoggedIn = false;
-		} else {
-			const expires = parseISO(user.expires);
-			if (isAfter(new Date(), expires)) {
-				isLoggedIn = false;
-			}
-		}
-	}
-} else {
-	isLoggedIn = false;
+if (!isLoggedIn()) {
+	isLogged = false;
 }
 
-if (!isLoggedIn) {
+if (!isLogged) {
 	console.log(red('You need to log in...'));
 	console.log(cyanBright('Log in using ' + bgBlack('cf configure')));
 }

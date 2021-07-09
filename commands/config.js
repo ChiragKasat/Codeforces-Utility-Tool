@@ -1,8 +1,10 @@
 const inquirer = require('inquirer');
 const login = require('../util/login');
+const isLoggedIn = require('../util/isLoggedIn');
 const addTemplate = require('../util/addTemplate');
 const showTemplates = require('../util/showTemplates');
 const deleteTemplate = require('../util/deleteTemplate');
+const { green } = require('chalk');
 
 module.exports = async () => {
 	const inp = await inquirer.prompt([
@@ -21,6 +23,10 @@ module.exports = async () => {
 
 	switch (inp.option) {
 		case 'login':
+			if (isLoggedIn()) {
+				console.log(green(`Already Logged In...`));
+				break;
+			}
 			const creds = await getCredentials();
 			login(creds.handleOrEmail, creds.password);
 			break;
