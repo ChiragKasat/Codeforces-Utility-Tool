@@ -4,6 +4,7 @@ const isLoggedIn = require('../util/isLoggedIn');
 const addTemplate = require('../util/addTemplate');
 const showTemplates = require('../util/showTemplates');
 const deleteTemplate = require('../util/deleteTemplate');
+const logout = require('../util/logout');
 const { green } = require('chalk');
 
 module.exports = async () => {
@@ -16,7 +17,8 @@ module.exports = async () => {
 				'login',
 				'add a template',
 				'delete a template',
-				'show all templates'
+				'show all templates',
+				'logout'
 			]
 		}
 	]);
@@ -38,6 +40,9 @@ module.exports = async () => {
 			break;
 		case 'show all templates':
 			showTemplates();
+			break;
+		case 'logout':
+			logout();
 			break;
 		default:
 			console.log('error');
