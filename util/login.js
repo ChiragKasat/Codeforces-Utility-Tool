@@ -3,7 +3,7 @@ const fs = require('fs');
 const homeDir = require('os').homedir();
 const path = require('path');
 const chalk = require('chalk');
-const FileCookieStore = require('tough-cookie-filestore');
+const FileCookieStore = require('tough-cookie-file-store').FileCookieStore;
 
 const cookiepath = path.join(homeDir, '.cfbot/cookies.json');
 

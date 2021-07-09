@@ -27,6 +27,7 @@
     "moment": "^2.27.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
-    "tough-cookie-filestore": "0.0.1"
+    "tough-cookie": "^4.0.0",
+    "tough-cookie-file-store": "^2.0.2"
   }
 }
