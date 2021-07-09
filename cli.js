@@ -6,7 +6,7 @@ const program = new Command();
 const pkg = require('./package.json');
 const homeDir = require('os').homedir();
 const { red, cyanBright, bgBlack } = require('chalk');
-const moment = require('moment');
+const { isAfter, parseISO } = require('date-fns');
 
 const root = path.join(homeDir, '.cfbot');
 const templatePath = path.join(root, 'template');
@@ -32,8 +32,8 @@ if (fs.existsSync(path.join(root, 'cookies.json'))) {
 		if (user === undefined) {
 			isLoggedIn = false;
 		} else {
-			const expires = user.expires;
-			if (moment().isAfter(expires)) {
+			const expires = parseISO(user.expires);
+			if (isAfter(new Date(), expires)) {
 				isLoggedIn = false;
 			}
 		}
