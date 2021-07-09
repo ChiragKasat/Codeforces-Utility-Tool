@@ -3,7 +3,7 @@ const fs = require('fs');
 const chalk = require('chalk');
 const FileCookieStore = require('tough-cookie-file-store').FileCookieStore;
 
-const { cookiepath } = require('../constants');
+const { cookiepath } = require('../constants/index');
 
 if (!fs.existsSync(cookiepath)) {
 	fs.writeFileSync(cookiepath, '{}');

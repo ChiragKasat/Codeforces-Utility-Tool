@@ -5,7 +5,7 @@ const program = new Command();
 const pkg = require('./package.json');
 const { red, cyanBright, bgBlack } = require('chalk');
 const isLoggedIn = require('./util/isLoggedIn');
-const { templatePath, root } = require('./constants');
+const { templatePath, root } = require('./constants/index');
 
 const templateData = {
 	templates: []

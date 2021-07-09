@@ -2,11 +2,10 @@ const path = require('path');
 const fs = require('fs');
 const { homedir } = require('os');
 const inquirer = require('inquirer');
-const languages = require('./languages');
+const languages = require('../constants/languages');
 const { green } = require('chalk');
-const templateData = JSON.parse(
-	fs.readFileSync(path.join(homedir(), '.cfbot', 'template'))
-);
+const { templatePath } = require('../constants/index');
+const templateData = JSON.parse(fs.readFileSync(templatePath));
 const aliases = templateData.templates.map(template => template.alias);
 
 module.exports = async () => {
@@ -15,10 +14,7 @@ module.exports = async () => {
 	answer.path = path.resolve(answer.path);
 	templateData.templates.push(answer);
 	answer.alias = answer.alias.trim();
-	fs.writeFileSync(
-		path.join(homedir(), '.cfbot', 'template'),
-		JSON.stringify(templateData)
-	);
+	fs.writeFileSync(templatePath, JSON.stringify(templateData));
 	console.log(green('Template added succesfully.'));
 };
 
@@ -47,12 +43,35 @@ const templateQuestions = [
 		type: 'input',
 		name: 'path',
 		message: 'Enter path to template(e.g. -> ./template.cpp)',
-		validate: function (value) {
+		validate: value => {
 			if (value[0] === '~') {
 				value = value.replace('~', homedir);
 			}
 			if (fs.statSync(value).isFile()) return true;
 			return 'File does not exist. Enter again...';
 		}
+	},
+	{
+		type: 'input',
+		name: 'pre_run',
+		message:
+			'Enter command that will run before running the tests like compiling command \n Can be empty \n File name with extension can be accessed by writing "{%file%} and filename by {%filename%}" \n for example, `g++ {%file%} -o {%filename%}`'
+	},
+	{
+		type: 'input',
+		name: 'run',
+		message:
+			'This command will run before each test, command for executing file \n File name with extension can be accessed by writing "{%file%} and filename by {%filename%}" \n for example, `./{%filename%}.out`',
+		validate: value => {
+			value = value.trim();
+			if (value) return true;
+			return "Cant't be empty";
+		}
+	},
+	{
+		type: 'input',
+		name: 'post_run',
+		message:
+			'Enter command that will run once after running all tests (cleaning commandd) \n Can be empty \n File name with extension can be accessed by writing "{%file%} and filename by {%filename%}" \n for example, `rm x{%filename%}.out`'
 	}
 ];

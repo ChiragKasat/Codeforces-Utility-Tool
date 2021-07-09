@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { cookiepath } = require('../constants');
+const { cookiepath } = require('../constants/index');
 const { green, red } = require('chalk');
 
 module.exports = () => {

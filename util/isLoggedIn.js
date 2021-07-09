@@ -1,6 +1,6 @@
 const { isAfter, parseISO } = require('date-fns');
 const fs = require('fs');
-const { cookiepath } = require('../constants');
+const { cookiepath } = require('../constants/index');
 
 module.exports = () => {
 	if (fs.existsSync(cookiepath)) {
