@@ -1,15 +1,12 @@
 #!/usr/bin/env node
 const fs = require('fs');
-const path = require('path');
 const { Command } = require('commander');
 const program = new Command();
 const pkg = require('./package.json');
-const homeDir = require('os').homedir();
 const { red, cyanBright, bgBlack } = require('chalk');
 const isLoggedIn = require('./util/isLoggedIn');
+const { templatePath, root } = require('./constants');
 
-const root = path.join(homeDir, '.cfbot');
-const templatePath = path.join(root, 'template');
 const templateData = {
 	templates: []
 };

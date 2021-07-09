@@ -1,11 +1,9 @@
 let request = require('request-promise');
 const fs = require('fs');
-const homeDir = require('os').homedir();
-const path = require('path');
 const chalk = require('chalk');
 const FileCookieStore = require('tough-cookie-file-store').FileCookieStore;
 
-const cookiepath = path.join(homeDir, '.cfbot/cookies.json');
+const { cookiepath } = require('../constants');
 
 if (!fs.existsSync(cookiepath)) {
 	fs.writeFileSync(cookiepath, '{}');

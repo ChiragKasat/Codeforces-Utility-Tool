@@ -1,14 +1,10 @@
 const { isAfter, parseISO } = require('date-fns');
 const fs = require('fs');
-const path = require('path');
-const homeDir = require('os').homedir();
-const root = path.join(homeDir, '.cfbot');
+const { cookiepath } = require('../constants');
 
 module.exports = () => {
-	if (fs.existsSync(path.join(root, 'cookies.json'))) {
-		const cookies = JSON.parse(
-			fs.readFileSync(path.join(root, 'cookies.json'))
-		);
+	if (fs.existsSync(cookiepath)) {
+		const cookies = JSON.parse(fs.readFileSync(cookiepath));
 		if (cookies['codeforces.com'] === undefined) {
 			return false;
 		} else {
