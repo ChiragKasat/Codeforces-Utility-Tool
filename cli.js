@@ -38,4 +38,11 @@ program
 	.description('configure your settings')
 	.action(cmd.config);
 
+program
+	.command('contest [contest_number]')
+	.description(
+		"Parse all questions of the contest whose number is provided, if number is not provided then you'll be given a list of your registered contests to choose from"
+	)
+	.action(cmd.contest);
+
 program.parse(process.argv);

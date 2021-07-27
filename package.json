@@ -22,9 +22,11 @@
   "homepage": "https://github.com/ChiragKasat/Codeforces-Utility-Tool#readme",
   "dependencies": {
     "chalk": "^4.1.0",
+    "cli-progress": "^3.9.0",
     "commander": "^5.1.0",
     "date-fns": "^2.22.1",
     "inquirer": "^7.3.1",
+    "node-html-parser": "^4.1.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
     "tough-cookie": "^4.0.0",
