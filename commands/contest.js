@@ -40,11 +40,11 @@ module.exports = async contest_number => {
 			} else {
 				console.log(cyan('\nContests you have registered for:'));
 				registeredContests.forEach(printContest);
+				const answer = await inquirer.prompt(
+					contestQuestions(registeredContests)
+				);
+				parseContest(answer.contest_number);
 			}
-			const answer = await inquirer.prompt(
-				contestQuestions(registeredContests)
-			);
-			parseContest(answer.contest_number);
 		} else {
 			parseContest(contest_number);
 		}

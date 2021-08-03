@@ -39,7 +39,10 @@ module.exports = async () => {
 			deleteTemplate();
 			break;
 		case 'show all templates':
-			showTemplates();
+			const templates = showTemplates();
+			for (const template of templates) {
+				console.log(template);
+			}
 			break;
 		case 'logout':
 			logout();

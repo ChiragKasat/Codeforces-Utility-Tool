@@ -8,11 +8,9 @@ module.exports = () => {
 		return `${index + 1}: ${template.alias} --> ${template.path}`;
 	});
 
-	if (templates.length == 0) {
+	if (templates.length === 0) {
 		console.log(red('No Templates Defined.'));
 	}
 
-	for (const template of templates) {
-		console.log(template);
-	}
+	return templates;
 };
