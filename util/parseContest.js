@@ -5,8 +5,11 @@ const parseTests = require('./parseTests');
 const { basename } = require('path');
 const inquirer = require('inquirer');
 const { templatePath } = require('../constants/index');
+const checkContest = require('./checkContest');
+const contestTimer = require('./contestTimer');
 const templateData = JSON.parse(fs.readFileSync(templatePath));
 const templates = templateData.templates;
+const { differenceInMinutes } = require('date-fns');
 
 const questions = [
 	{
@@ -32,7 +35,23 @@ module.exports = async contest_number => {
 		const contestURL = `https://codeforces.com/contest/${contest_number}`;
 		const body = await request.get(contestURL);
 		if (!body.includes(`/contest/${contest_number}/submit`)) {
-			throw Error('Contest does not exist');
+			const { registeredContests } = await checkContest();
+			const contest = registeredContests.filter(
+				registeredContest => registeredContest.contestID == contest_number
+			)[0];
+			const timerLimit = 5;
+			if (!contest) throw Error('Contest does not exist');
+			const difference = Math.abs(
+				differenceInMinutes(new Date(contest.contestStartTime), new Date())
+			);
+			if (difference > timerLimit) {
+				console.log(
+					`Contest starts on ${contest.contestStartTime}. Timer will begin when contest starts in less than ${timerLimit} minutes.`
+				);
+				return;
+			} else {
+				await contestTimer(difference * 60 + 1);
+			}
 		}
 		const root = parse(body);
 		const problems = [];
@@ -40,6 +59,9 @@ module.exports = async contest_number => {
 			if (elem.getAttribute('data-problem-name') !== '')
 				problems.push(elem.getAttribute('value'));
 		});
+
+		if (problems.length === 0)
+			throw Error("Contest hasn't started. Try again!");
 
 		let template;
 		if (templates.length !== 1) {
