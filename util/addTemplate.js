@@ -5,6 +5,7 @@ const inquirer = require('inquirer');
 const languages = require('../constants/languages');
 const { green } = require('chalk');
 const { templatePath } = require('../constants/index');
+const getExtension = require('./getExtension');
 const templateData = JSON.parse(fs.readFileSync(templatePath));
 const aliases = templateData.templates.map(template => template.alias);
 
@@ -14,6 +15,7 @@ module.exports = async () => {
 	answer.path = path.resolve(answer.path);
 	templateData.templates.push(answer);
 	answer.alias = answer.alias.trim();
+	answer.extension = getExtension(answer.path);
 	fs.writeFileSync(templatePath, JSON.stringify(templateData));
 	console.log(green('Template added succesfully.'));
 };

@@ -45,4 +45,11 @@ program
 	)
 	.action(cmd.contest);
 
+program
+	.command('test <problem>')
+	.description(
+		'Test your solution against given test cases. Enter the problem number to test'
+	)
+	.action(cmd.test);
+
 program.parse(process.argv);

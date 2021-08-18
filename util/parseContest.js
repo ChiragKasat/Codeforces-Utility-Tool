@@ -2,7 +2,6 @@ let request = require('request-promise');
 const fs = require('fs');
 const { parse } = require('node-html-parser');
 const parseTests = require('./parseTests');
-const { basename } = require('path');
 const inquirer = require('inquirer');
 const { templatePath } = require('../constants/index');
 const checkContest = require('./checkContest');
@@ -21,11 +20,6 @@ const questions = [
 		})
 	}
 ];
-
-const getExtension = templatePath => {
-	const file = basename(templatePath);
-	return file.split('.').pop();
-};
 
 module.exports = async contest_number => {
 	try {
@@ -73,7 +67,7 @@ module.exports = async contest_number => {
 			template = templates[0];
 		}
 
-		const extension = getExtension(template.path);
+		const extension = template.extension;
 		const contestFolderPath = `./${contest_number}`;
 		const testFolderPath = `./${contest_number}/.tests`;
 		if (fs.existsSync(contestFolderPath)) {
