@@ -47,6 +47,7 @@ program
 
 program
 	.command('test <problem>')
+	.option('-o --show-output', 'show output of tests without comparing with expected output')
 	.description(
 		'Test your solution against given test cases. Enter the problem number to test'
 	)
