@@ -82,7 +82,6 @@ module.exports = async problem => {
 				}
 			);
 		}
-		//:TODO Complete post_run command
 	} catch (e) {
 		console.log(`${e}`);
 	}

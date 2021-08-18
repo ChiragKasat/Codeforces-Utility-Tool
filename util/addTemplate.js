@@ -57,23 +57,17 @@ const templateQuestions = [
 		type: 'input',
 		name: 'pre_run',
 		message:
-			'Enter command that will run before running the tests like compiling command \n Can be empty \n File name with extension can be accessed by writing "{%file%} and filename by {%filename%}" \n for example, `g++ {%file%} -o {%filename%}`'
+			'Enter command for compiling \n Can be skipped if not required \n File name with extension can be accessed by writing "{%file%} and filename by {%filename%}" \n for example, `g++ {%file%} -o {%filename%}`'
 	},
 	{
 		type: 'input',
 		name: 'run',
 		message:
-			'This command will run before each test, command for executing file \n File name with extension can be accessed by writing "{%file%} and filename by {%filename%}" \n for example, `./{%filename%}.out`',
+			'Enter command for executing file, will run before each test,  \n File name with extension can be accessed by writing "{%file%} and filename by {%filename%}" \n for example, `./{%filename%}.out` or `python {%filename%}`',
 		validate: value => {
 			value = value.trim();
 			if (value) return true;
 			return "Cant't be empty";
 		}
-	},
-	{
-		type: 'input',
-		name: 'post_run',
-		message:
-			'Enter command that will run once after running all tests (cleaning commandd) \n Can be empty \n File name with extension can be accessed by writing "{%file%} and filename by {%filename%}" \n for example, `rm x{%filename%}.out`'
 	}
 ];
