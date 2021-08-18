@@ -5,6 +5,7 @@ const path = require('path');
 const getExtension = require('../util/getExtension');
 const { cyan, green, red } = require('chalk');
 const Diff = require('diff');
+const isWindows = require('../util/isWindows');
 
 module.exports = async problem => {
 	try {
@@ -39,8 +40,9 @@ module.exports = async problem => {
 		for (const file of inputFiles) {
 			const testNumber = file.split('.')[0];
 			console.log(cyan(`Running Test ${testNumber}`));
+			const catcomm = isWindows() ? 'type' : 'cat';
 			exec(
-				`cat ${path.join(testFolderPath, file)} | ${path.resolve(
+				`${catcomm} ${path.join(testFolderPath, file)} | ${path.resolve(
 					parseCommand(info.template.run, filePath)
 				)}`,
 				(err, output) => {
