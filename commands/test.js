@@ -45,8 +45,7 @@ module.exports = async problem => {
 				)}`,
 				(err, output) => {
 					if (err !== null) {
-						console.log(err);
-						throw Error();
+						throw Error('Error in problem');
 					}
 
 					output = output.replace(/\r/g, '').trim();
