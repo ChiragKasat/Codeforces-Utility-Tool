@@ -36,7 +36,10 @@ module.exports = async contest_number => {
 			const timerLimit = 5;
 			if (!contest) throw Error('Contest does not exist');
 			const difference = Math.abs(
-				differenceInMinutes(new Date(contest.contestStartTime), new Date())
+				differenceInMinutes(
+					new Date(`${contest.contestStartTime} GMT+0300`),
+					new Date()
+				)
 			);
 			if (difference > timerLimit) {
 				console.log(

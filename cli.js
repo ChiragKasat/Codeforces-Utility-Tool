@@ -47,10 +47,20 @@ program
 
 program
 	.command('test <problem>')
-	.option('-o --show-output', 'show output of tests without comparing with expected output')
+	.option(
+		'-o --show-output',
+		'show output of tests without comparing with expected output'
+	)
 	.description(
 		'Test your solution against given test cases. Enter the problem number to test'
 	)
 	.action(cmd.test);
+
+program
+	.command('submit <problem>')
+	.description(
+		'Submit your solution to the problem. Enter the problem number to submit'
+	)
+	.action(cmd.submit);
 
 program.parse(process.argv);

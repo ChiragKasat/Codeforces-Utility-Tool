@@ -1,6 +1,7 @@
 let request = require('request-promise');
 const fs = require('fs');
 const chalk = require('chalk');
+const getCSRF = require('./getCSRF');
 const FileCookieStore = require('tough-cookie-file-store').FileCookieStore;
 
 const { cookiepath } = require('../constants/index');
@@ -13,15 +14,10 @@ const cookieJar = request.jar(new FileCookieStore(cookiepath));
 
 request = request.defaults({ jar: cookieJar });
 
-const setCSRF = body => {
-	let csrf_token = body.split('data-csrf=')[1].split("'")[1];
-	return csrf_token;
-};
-
 module.exports = async (handleOrEmail, password) => {
 	try {
 		const body = await request.get('https://codeforces.com/enter');
-		let token = setCSRF(body);
+		const token = getCSRF(body);
 
 		request
 			.post('https://codeforces.com/enter?f0a28=1', {
