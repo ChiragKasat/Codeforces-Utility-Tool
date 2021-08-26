@@ -1,6 +1,5 @@
 const checkContest = require('../util/checkContest');
 const parseContest = require('../util/parseContest');
-const isLoggedIn = require('../util/isLoggedIn');
 const { cyan, red } = require('chalk');
 const { format } = require('date-fns');
 const inquirer = require('inquirer');
@@ -28,9 +27,6 @@ const printContest = ({ contestID, contestStartTime, contestName }) => {
 
 module.exports = async contest_number => {
 	try {
-		if (!isLoggedIn()) {
-			return;
-		}
 		if (contest_number === undefined) {
 			const { registeredContests, contests } = await checkContest();
 			console.log('\nUpcoming Contests:');
