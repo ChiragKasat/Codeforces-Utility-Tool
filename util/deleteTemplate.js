@@ -5,6 +5,8 @@ const { templatePath } = require('../constants/index');
 const templateData = JSON.parse(fs.readFileSync(templatePath));
 const templates = templateData.templates;
 
+//TODO: Check for 0 templates
+
 module.exports = async () => {
 	const answer = await inquirer.prompt(questions);
 	const index = answer.template.split(':')[0];
