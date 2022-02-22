@@ -9,6 +9,7 @@ const contestTimer = require('./contestTimer');
 const templateData = JSON.parse(fs.readFileSync(templatePath));
 const templates = templateData.templates;
 const { differenceInMinutes } = require('date-fns');
+const { red, cyan } = require('chalk');
 
 const questions = [
 	{
@@ -61,6 +62,11 @@ module.exports = async contest_number => {
 			throw Error("Contest hasn't started. Try again!");
 
 		let template;
+		if (templates.length === 0) {
+			console.log(red('Please add a template first.\n'));
+			console.log(cyan('Use `cf configure`'));
+			return;
+		}
 		if (templates.length !== 1) {
 			const answer = await inquirer.prompt(questions);
 			template = templates.filter(
