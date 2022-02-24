@@ -8,7 +8,7 @@ module.exports = () => {
 		if (cookies['codeforces.com'] === undefined) {
 			return false;
 		} else {
-			const user = cookies['codeforces.com']['/']['X-User-Sha1'];
+			const user = cookies['codeforces.com']['/']['X-User'];
 			if (user === undefined) {
 				return false;
 			} else {
