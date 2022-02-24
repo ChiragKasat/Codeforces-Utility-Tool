@@ -51,12 +51,14 @@ module.exports = async problem => {
 			.post(submitUrl, {
 				form: {
 					csrf_token: token,
+					ftaa: 'm734snqucoaryw485l',
+					bfaa: '728d9abf23a66baf29b7fa095eaa64d6',
 					action: 'submitSolutionFormSubmitted',
 					submittedProblemIndex: problem,
 					programTypeId: info.template.lang,
 					source,
 					tabSize: 4,
-					_tta: '790'
+					_tta: '337'
 				}
 			})
 			.then(body => {
