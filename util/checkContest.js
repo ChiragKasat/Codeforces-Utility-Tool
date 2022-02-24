@@ -21,7 +21,9 @@ module.exports = async () => {
 		const registeredContests = [];
 		const contests = [];
 		for (let i = 3; i < table.length; i += 2) {
-			const contestName = table[i].childNodes[1].innerText.trim();
+			const contestName = table[i].childNodes[1].innerText
+				.trim()
+				.split('\r')[0];
 			const contestStartTime =
 				table[i].childNodes[5].childNodes[1].innerText.trim();
 			const contestID = table[i].getAttribute('data-contestid');
