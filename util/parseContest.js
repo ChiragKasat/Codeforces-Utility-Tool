@@ -9,7 +9,7 @@ const contestTimer = require('./contestTimer');
 const templateData = JSON.parse(fs.readFileSync(templatePath));
 const templates = templateData.templates;
 const { differenceInMinutes } = require('date-fns');
-const { red, cyan } = require('chalk');
+const { red, cyan, green } = require('chalk');
 
 const questions = [
 	{
@@ -88,14 +88,17 @@ module.exports = async contest_number => {
 		const source = fs.readFileSync(template.path);
 		fs.mkdirSync(contestFolderPath);
 		fs.mkdirSync(testFolderPath);
+		console.log(green(`${contest_number} Folder created...`));
 		problems.forEach(problem => {
 			fs.writeFileSync(`${contestFolderPath}/${problem}.${extension}`, source);
 			const testProblemPath = `${testFolderPath}/${problem}`;
 			fs.mkdirSync(testProblemPath);
 			parseTests(contestURL, problem, testProblemPath);
+			console.log(green(`Parsed problem ${problem}...`));
 		});
 		const info = { template, contest_number };
 		fs.writeFileSync(`${contestFolderPath}/.info`, JSON.stringify(info));
+		console.log('\nDone. All the best!');
 	} catch (e) {
 		console.error(`${e}`);
 	}
